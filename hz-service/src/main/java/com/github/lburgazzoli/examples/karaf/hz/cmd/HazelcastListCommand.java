@@ -87,11 +87,10 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
      * @throws Exception
      */
     public void doExecuteDistributedObjectList(HazelcastInstance instance) throws Exception {
-        ShellTable table = new ShellTable("ID","Name","Class");
+        ShellTable table = new ShellTable("Name","Class");
 
         for(DistributedObject o : instance.getDistributedObjects()) {
             table.addRow(
-                o.getId(),
                 o.getName(),
                 o.getClass()
             );

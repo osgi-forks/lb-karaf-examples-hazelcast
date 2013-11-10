@@ -19,7 +19,6 @@ subprojects {
         maven { url 'http://repository.springsource.com/maven/bundles/release' }
         maven { url 'http://repository.springsource.com/maven/bundles/external' }
         maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'http://kundera.googlecode.com/svn/maven2/maven-missing-resources' }
         
         mavenLocal()
 
@@ -44,12 +43,7 @@ subprojects {
         compile 'org.osgi:org.osgi.core:4.3.1'
         compile 'org.osgi:org.osgi.compendium:4.3.1'
         compile 'com.google.guava:guava:15.0'
-        compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.1'
-        compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1'
-        compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
-        compile 'org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1'
-        compile 'com.hazelcast:hazelcast:3.1'
-        compile 'com.lmax:disruptor:3.2.0'
+        compile 'com.hazelcast:hazelcast:3.1.1'
         compile 'com.esotericsoftware.kryo:kryo:2.21'
         compile 'com.fasterxml.jackson.core:jackson-core:2.2.2'
         compile 'com.fasterxml.jackson.core:jackson-databind:2.2.2'
@@ -64,9 +58,10 @@ subprojects {
         testCompile 'org.apache.felix:org.apache.felix.framework:4.2.1'
     }
 
-    //[compileJava, compileTestJava]*.options*.compilerArgs = [
-    //    "-Xlint:unchecked"
-    //]
+    [compileJava, compileTestJava]*.options*.compilerArgs = [
+        "-Xlint:unchecked",
+        "-Xlint:deprecation"
+    ]
 
     jar {
         baseName = "${project.prefix}-${project.name}"
