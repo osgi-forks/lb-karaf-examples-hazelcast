@@ -1,0 +1,23 @@
+
+project.ext {
+    bundleInportPackages = [
+        '*'
+    ]
+
+    bundleExportPackages = [
+        '*'
+    ]
+}
+
+dependencies {
+
+    compile project(':hz-service')
+    compile project(':hz-data')
+}
+
+jar {
+    manifest {
+        instruction 'Import-Package' , bundleInportPackages.join(',')
+        instruction 'Export-Package' , bundleExportPackages.join(',')
+    }
+}
