@@ -16,7 +16,6 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.data.cmd;
 
-import com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider;
 import com.github.lburgazzoli.examples.karaf.hz.cmd.AbstractHazelcastCompleter;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
 

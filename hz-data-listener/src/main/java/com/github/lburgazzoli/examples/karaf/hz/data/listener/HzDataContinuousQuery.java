@@ -21,7 +21,6 @@ import com.github.lburgazzoli.examples.karaf.hz.data.HzData;
 import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.EntryListener;
 import com.hazelcast.core.IMap;
-import com.hazelcast.query.Predicate;
 import com.hazelcast.query.SqlPredicate;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

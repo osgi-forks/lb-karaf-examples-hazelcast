@@ -16,15 +16,14 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.data.cmd;
 
-import com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider;
 import com.github.lburgazzoli.examples.karaf.hz.cmd.AbstractHazelcastCommand;
 import com.github.lburgazzoli.examples.karaf.hz.data.HzData;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.SqlPredicate;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.commands.Argument;
+import org.apache.karaf.shell.commands.Command;
 
 import java.util.List;
 

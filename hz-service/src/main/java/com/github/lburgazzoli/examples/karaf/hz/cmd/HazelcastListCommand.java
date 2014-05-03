@@ -16,15 +16,14 @@
  */
 package com.github.lburgazzoli.examples.karaf.hz.cmd;
 
-import com.github.lburgazzoli.examples.karaf.hz.IHazelcastInstanceProvider;
-import com.github.lburgazzoli.karaf.common.cmd.ShellTable;
 import com.hazelcast.core.DistributedObject;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.Member;
 import com.hazelcast.core.Partition;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.commands.Argument;
+import org.apache.karaf.shell.commands.Command;
+import org.apache.karaf.shell.table.ShellTable;
 
 /**
  *
@@ -67,18 +66,23 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
      * @throws Exception
      */
     public void doExecuteMemberList(HazelcastInstance instance) throws Exception {
-        ShellTable table = new ShellTable("ID","Host","Port","Local");
+
+        ShellTable table = new ShellTable();
+        table.column("ID");
+        table.column("Host");
+        table.column("Port");
+        table.column("Local");;
 
         for(Member m : instance.getCluster().getMembers()) {
-            table.addRow(
+            table.addRow().addContent(
                 m.getUuid(),
-                m.getInetSocketAddress().getHostName(),
-                m.getInetSocketAddress().getPort(),
+                m.getSocketAddress().getHostName(),
+                m.getSocketAddress().getPort(),
                 m.localMember() ? "*" : StringUtils.EMPTY
             );
         }
 
-        table.print();
+        table.print(System.out);
     }
 
     /**
@@ -87,16 +91,18 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
      * @throws Exception
      */
     public void doExecuteDistributedObjectList(HazelcastInstance instance) throws Exception {
-        ShellTable table = new ShellTable("Name","Class");
+        ShellTable table = new ShellTable();
+        table.column("Name");
+        table.column("Class");
 
         for(DistributedObject o : instance.getDistributedObjects()) {
-            table.addRow(
+            table.addRow().addContent(
                 o.getName(),
                 o.getClass()
             );
         }
 
-        table.print();
+        table.print(System.out);
     }
 
     /**
@@ -105,15 +111,17 @@ public class HazelcastListCommand extends AbstractHazelcastCommand {
      * @throws Exception
      */
     public void doExecutePartitionList(HazelcastInstance instance) throws Exception {
-        ShellTable table = new ShellTable("ID","Member");
+        ShellTable table = new ShellTable();
+        table.column("ID");
+        table.column("Member");
 
         for(Partition p : instance.getPartitionService().getPartitions()) {
-            table.addRow(
+            table.addRow().addContent(
                 p.getPartitionId(),
                 p.getOwner().getUuid()
             );
         }
 
-        table.print();
+        table.print(System.out);
     }
 }

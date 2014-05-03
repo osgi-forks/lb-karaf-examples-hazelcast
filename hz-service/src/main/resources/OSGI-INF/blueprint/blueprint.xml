@@ -30,28 +30,8 @@
             <cm:property
                 name  = "hz.config.path"
                 value = "etc/com.github.lburgazzoli.karaf.hz.service.xml"/>
-            <cm:property
-                name  = "hz.classloader.bundles"
-                value = "karaf-examples-commons-osgi"/>
         </cm:default-properties>
     </cm:property-placeholder>
-
-    <!-- ******************************************************************* -->
-    <!--                                                                     -->
-    <!-- ******************************************************************* -->
-
-    <bean id    = "OSGI_CLASSLOADER"
-          class = "com.github.lburgazzoli.osgi.OSGiClassLoader">
-    </bean>
-
-    <bean id             = "OSGI_CLASSLOADER_MGR"
-          class          = "com.github.lburgazzoli.osgi.OSGiClassLoaderManager"
-          init-method    = "init"
-          destroy-method = "destroy">
-        <argument ref  = "blueprintBundleContext"/>
-        <argument ref  = "OSGI_CLASSLOADER"/>
-        <property name = "eligibleBundleIds" value="${hz.classloader.bundles}"/>
-    </bean>
 
     <!-- ******************************************************************* -->
     <!--                                                                     -->
@@ -64,7 +44,6 @@
         <argument>
             <bean class = "com.github.lburgazzoli.examples.karaf.hz.HazelcastConfig">
                 <argument value = "${hz.config.path}"/>
-                <argument ref   = "OSGI_CLASSLOADER"/>
             </bean>
         </argument>
     </bean>
@@ -91,11 +70,6 @@
         <property name="service" ref="HZ_PROVIDER"/>
     </bean>
 
-    <bean id    = "HZ_CL_CLASS_LIST_COMPLETER"
-          class = "com.github.lburgazzoli.examples.karaf.hz.cmd.ClassLoaderClassListCompleter">
-        <property name="service" ref="OSGI_CLASSLOADER"/>
-    </bean>
-
     <!-- ******************************************************************* -->
     <!-- COMMANDS                                                            -->
     <!-- ******************************************************************* -->
@@ -107,19 +81,6 @@
             </action>
             <completers>
                 <ref component-id="HZ_LIST_COMPLETER"/>
-            </completers>
-        </command>
-        <command name="hz/cl-bundles">
-            <action class="com.github.lburgazzoli.examples.karaf.hz.cmd.ClassLoaderBundleListCommand">
-                <property name="service" ref="OSGI_CLASSLOADER"/>
-            </action>
-        </command>
-        <command name="hz/cl-classes">
-            <action class="com.github.lburgazzoli.examples.karaf.hz.cmd.ClassLoaderClassListCommand">
-                <property name="service" ref="OSGI_CLASSLOADER"/>
-            </action>
-            <completers>
-                <ref component-id="HZ_CL_CLASS_LIST_COMPLETER"/>
             </completers>
         </command>
     </command-bundle>
