@@ -22,7 +22,7 @@ import com.github.lburgazzoli.karaf.common.BundleContextAware;
  *
  */
 public class HazelcastAwareObject extends BundleContextAware {
-    private IHazelcastInstanceProxy m_hazelcastManager;
+    private HazelcastInstanceProxy m_hazelcastManager;
 
     /**
      *
@@ -35,7 +35,7 @@ public class HazelcastAwareObject extends BundleContextAware {
      *
      * @param hazelcastManager
      */
-    public void setHazelcastManager(IHazelcastInstanceProxy hazelcastManager) {
+    public void setHazelcastManager(HazelcastInstanceProxy hazelcastManager) {
         m_hazelcastManager = hazelcastManager;
     }
 
@@ -43,7 +43,7 @@ public class HazelcastAwareObject extends BundleContextAware {
      *
      * @return
      */
-    public IHazelcastInstanceProxy getHazelcastManager() {
+    public HazelcastInstanceProxy getHazelcastManager() {
         return m_hazelcastManager;
     }
 }
